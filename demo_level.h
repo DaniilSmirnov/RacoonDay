@@ -155,7 +155,7 @@ void open_demo_level(int Weidth,int Height){
             if (enemy_dx < 1){
                 enemy[i].setPosition(Enemy_x[i]++,Enemy_y[i]);
         }
-            if (enemy_dx ==1){
+            if (enemy_dx == 1){
 
                 enemy[i].setPosition(Enemy_x[i]--,Enemy_y[i]);
             }
