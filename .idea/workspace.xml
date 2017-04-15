@@ -365,7 +365,7 @@
       <workItem from="1491843600257" duration="952000" />
       <workItem from="1491932638442" duration="4974000" />
       <workItem from="1492096068246" duration="1106000" />
-      <workItem from="1492261456503" duration="17951000" />
+      <workItem from="1492261456503" duration="17988000" />
     </task>
     <task id="LOCAL-00001" summary="added vcs.xml.Enemy not completed">
       <created>1492261706268</created>
@@ -388,11 +388,18 @@
       <option name="project" value="LOCAL" />
       <updated>1492279438752</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Кривое перемещение врага">
+      <created>1492279463616</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1492279463616</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66300000" />
+    <option name="totallyTimeSpent" value="66337000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
