@@ -341,7 +341,7 @@ void open_demo_level(int Weidth,int Height){
 
         Camera.setCenter(Camera_x,Camera_y);
         Camera.setSize(Vector2f(200,200));
-        //Level_Demo.setView(Camera);
+        Level_Demo.setView(Camera);
 
 
         raccoon.setSize(Vector2f(16,32));

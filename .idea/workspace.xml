@@ -13,6 +13,7 @@
   <component name="ChangeListManager">
     <list default="true" id="625aa106-62eb-4ae6-b482-6318b6a56345" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo_level.h" afterPath="$PROJECT_DIR$/demo_level.h" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,8 +41,8 @@
       <file leaf-file-name="demo_level.h" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/demo_level.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="295" column="40" lean-forward="false" selection-start-line="295" selection-start-column="40" selection-end-line="295" selection-end-column="40" />
+            <state relative-caret-position="144">
+              <caret line="343" column="8" lean-forward="false" selection-start-line="343" selection-start-column="8" selection-end-line="343" selection-end-column="8" />
               <folding>
                 <element signature="e#105#133#0" expanded="true" />
               </folding>
@@ -365,7 +366,7 @@
       <workItem from="1491843600257" duration="952000" />
       <workItem from="1491932638442" duration="4974000" />
       <workItem from="1492096068246" duration="1106000" />
-      <workItem from="1492261456503" duration="17988000" />
+      <workItem from="1492261456503" duration="18286000" />
     </task>
     <task id="LOCAL-00001" summary="added vcs.xml.Enemy not completed">
       <created>1492261706268</created>
@@ -395,11 +396,18 @@
       <option name="project" value="LOCAL" />
       <updated>1492279463616</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Кривое перемещение врага">
+      <created>1492279503045</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1492279503045</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66337000" />
+    <option name="totallyTimeSpent" value="66635000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -837,8 +845,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/demo_level.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="295" column="40" lean-forward="false" selection-start-line="295" selection-start-column="40" selection-end-line="295" selection-end-column="40" />
+        <state relative-caret-position="144">
+          <caret line="343" column="8" lean-forward="false" selection-start-line="343" selection-start-column="8" selection-end-line="343" selection-end-column="8" />
           <folding>
             <element signature="e#105#133#0" expanded="true" />
           </folding>
