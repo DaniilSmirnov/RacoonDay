@@ -61,15 +61,17 @@ void open_demo_level(int Weidth,int Height){
     float Bullet_speed_x=0;
     float Bullet_speed_y=0;
     int dx,dy;
-    int enemy_dx=-1;
+    int enemy_dx= -1;
     int enemy_dy= 0;
     int enemies_counter=0;
     float Enemy_x[enemies];
     float Enemy_y[enemies];
     float Enemy_speed=0;
 
+    int buf=0;
 
     bool act_exec;
+    bool enemy_exec;
 
     while (Level_Demo.isOpen())
     {
@@ -145,35 +147,7 @@ void open_demo_level(int Weidth,int Height){
 
             }
 
-        //ENEMY
 
-        for(int i=0;i<enemies_counter;i++) {
-            enemy[i].setFillColor(Color::White);
-            enemy[i].setSize(Vector2f(16, 32));
-            Level_Demo.draw(enemy[i]);
-
-            for (int k = Enemy_y[i] / 32; k < (Enemy_y[i] + 16) / 32; k++)//проходимся по тайликам, контактирующим с игроком, то есть по всем квадратикам размера 32*32, которые мы окрашивали в 9 уроке. про условия читайте ниже.
-            {
-                for (int l = Enemy_x[i] / 32; l < (Enemy_x[i] + 16) / 32; l++)//икс делим на 32, тем самым получаем левый квадратик, с которым персонаж соприкасается. (он ведь больше размера 32*32, поэтому может одновременно стоять на нескольких квадратах). А j<(x + w) / 32 - условие ограничения координат по иксу. то есть координата самого правого квадрата, который соприкасается с персонажем. таким образом идем в цикле слева направо по иксу, проходя по от левого квадрата (соприкасающегося с героем), до правого квадрата (соприкасающегося с героем)
-                {
-                    if (demo_level_map[k][l] == '0')//если наш квадратик соответствует символу 0 (стена), то проверяем "направление скорости" персонажа:
-                    {
-
-                        if (enemy_dx == 1) {
-                            enemy_dx = -1;
-                            //Enemy_x[i]++;//если идем вправо, то координата Х равна стена (символ 0) минус ширина персонажа
-                        }
-                        if (enemy_dx == -1) {
-                            enemy_dx = 1;
-                            //Enemy_x[i]--;//аналогично идем влево
-                        }
-                    }
-                }
-            }
-
-            enemy[i].setPosition(Enemy_x[i]+=enemy_dx,Enemy_y[i]);
-
-            }
 
         //BULLET COLLISION with enemy (and enemy ) NOT COMPLETED
 
@@ -220,6 +194,7 @@ void open_demo_level(int Weidth,int Height){
             Player_x-=Player_speed;
             dx=-1;
             dy=0;
+            //enemy_dx=-1;
             act_exec=true;
             raccoon.setTexture(&raccoon_left_texture);
 
@@ -293,13 +268,75 @@ void open_demo_level(int Weidth,int Height){
 
         }
 
+        //ENEMY
+
+        for(int i=0;i<enemies_counter;i++) {
+            enemy[i].setFillColor(Color::White);
+            enemy[i].setSize(Vector2f(16, 32));
+
+            for (int k = Enemy_y[i] / 32; k < (Enemy_y[i] + 16) / 32; k++)//проходимся по тайликам, контактирующим с игроком, то есть по всем квадратикам размера 32*32, которые мы окрашивали в 9 уроке. про условия читайте ниже.
+            {
+                for (int l = Enemy_x[i] / 32; l < (Enemy_x[i] + 16) / 32; l++)//икс делим на 32, тем самым получаем левый квадратик, с которым персонаж соприкасается. (он ведь больше размера 32*32, поэтому может одновременно стоять на нескольких квадратах). А j<(x + w) / 32 - условие ограничения координат по иксу. то есть координата самого правого квадрата, который соприкасается с персонажем. таким образом идем в цикле слева направо по иксу, проходя по от левого квадрата (соприкасающегося с героем), до правого квадрата (соприкасающегося с героем)
+                {
+                    if (demo_level_map[k][l] == '0')//если наш квадратик соответствует символу 0 (стена), то проверяем "направление скорости" персонажа:
+                    {
+
+                        if (enemy_dx == 1) {
+                            Enemy_x[i]--;
+                        }
+                        if (enemy_dx == -1) {
+                            Enemy_x[i]++;
+                        }
+
+                        if (enemy_dy == -1) {
+                            Enemy_y[i]++;
+                        }
+
+                        if (enemy_dy == 1) {
+                            Enemy_y[i]--;
+                        }
+
+
+                    }
+                }
+            }
+
+            if(Enemy_x[i] == Player_x ){
+
+                if(Enemy_y[i] > Player_y){
+
+                    while ( Enemy_y[i]-32 != Player_y) {
+                        Enemy_y[i]-=0.5;
+                        enemy[i].setPosition(Enemy_x[i],Enemy_y[i]);
+                        enemy_dy=-1;
+                        //Level_Demo.draw(enemy[i]);
+
+                    }
+                }
+
+                if(Enemy_y[i] < Player_y){
+
+                    while ( Enemy_y[i]+32 != Player_y) {
+                        Enemy_y[i]+=0.5;
+                        enemy[i].setPosition(Enemy_x[i],Enemy_y[i]);
+                        enemy_dy=1;
+                        //Level_Demo.draw(enemy[i]);
+                    }
+                    //Enemy_y[i]++;
+                }
+
+            }
+            enemy[i].setPosition(Enemy_x[i],Enemy_y[i]+=enemy_dy);
+            Level_Demo.draw(enemy[i]);
+        }
+
         //Настройка камеры
 
         Camera_x=Player_x+32;
         Camera_y=Player_y;
 
         //if (Player_x < 64) Camera_x = 64;//убираем из вида левую сторону
-       // if (Player_y < 32+120) Camera_y = 64;//верхнюю сторону
+        // if (Player_y < 32+120) Camera_y = 64;//верхнюю сторону
         //if (Player_x > 320) Camera_y = 320;//нижнюю сторону
 
         Camera.setCenter(Camera_x,Camera_y);
