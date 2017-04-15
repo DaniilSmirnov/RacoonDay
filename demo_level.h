@@ -61,7 +61,8 @@ void open_demo_level(int Weidth,int Height){
     float Bullet_speed_x=0;
     float Bullet_speed_y=0;
     int dx,dy;
-    int enemy_dx;
+    int enemy_dx=-1;
+    int enemy_dy= 0;
     int enemies_counter=0;
     float Enemy_x[enemies];
     float Enemy_y[enemies];
@@ -150,18 +151,29 @@ void open_demo_level(int Weidth,int Height){
             enemy[i].setFillColor(Color::White);
             enemy[i].setSize(Vector2f(16, 32));
             Level_Demo.draw(enemy[i]);
-            srand( time(0) );
-            enemy_dx = rand()% 1;
-            if (enemy_dx < 1){
-                enemy[i].setPosition(Enemy_x[i]++,Enemy_y[i]);
-        }
-            if (enemy_dx == 1){
 
-                enemy[i].setPosition(Enemy_x[i]--,Enemy_y[i]);
+            for (int k = Enemy_y[i] / 32; k < (Enemy_y[i] + 16) / 32; k++)//проходимся по тайликам, контактирующим с игроком, то есть по всем квадратикам размера 32*32, которые мы окрашивали в 9 уроке. про условия читайте ниже.
+            {
+                for (int l = Enemy_x[i] / 32; l < (Enemy_x[i] + 16) / 32; l++)//икс делим на 32, тем самым получаем левый квадратик, с которым персонаж соприкасается. (он ведь больше размера 32*32, поэтому может одновременно стоять на нескольких квадратах). А j<(x + w) / 32 - условие ограничения координат по иксу. то есть координата самого правого квадрата, который соприкасается с персонажем. таким образом идем в цикле слева направо по иксу, проходя по от левого квадрата (соприкасающегося с героем), до правого квадрата (соприкасающегося с героем)
+                {
+                    if (demo_level_map[k][l] == '0')//если наш квадратик соответствует символу 0 (стена), то проверяем "направление скорости" персонажа:
+                    {
+
+                        if (enemy_dx == 1) {
+                            enemy_dx = -1;
+                            //Enemy_x[i]++;//если идем вправо, то координата Х равна стена (символ 0) минус ширина персонажа
+                        }
+                        if (enemy_dx == -1) {
+                            enemy_dx = 1;
+                            //Enemy_x[i]--;//аналогично идем влево
+                        }
+                    }
+                }
             }
 
-        }
+            enemy[i].setPosition(Enemy_x[i]+=enemy_dx,Enemy_y[i]);
 
+            }
 
         //BULLET COLLISION with enemy (and enemy ) NOT COMPLETED
 
