@@ -4,8 +4,8 @@
 
 using namespace sf;
 
-const int Weidth=1280;
-const int Height=640;
+const unsigned int Weidth=1280;
+const unsigned int Height=640;
 
 int main()
 {
