@@ -7,8 +7,8 @@
 
 #include <SFML/Graphics.hpp>
 
-const int Menu_weidth=640;
-const int Menu_height =480;
+const unsigned int Menu_weidth=640;
+const unsigned int Menu_height =480;
 
 using namespace sf;
 

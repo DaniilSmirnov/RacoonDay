@@ -49,7 +49,7 @@ void open_demo_level(int Weidth,int Height) {
 
     RenderWindow Level_Demo(VideoMode(Weidth, Height), "Demo_level");
 
-    //Level_Demo.setVerticalSyncEnabled(true);
+    Level_Demo.setVerticalSyncEnabled(true);
     Level_Demo.setFramerateLimit(60);
 
     float Player_x = 100;
@@ -67,13 +67,9 @@ void open_demo_level(int Weidth,int Height) {
     int enemies_counter = 0;
     float Enemy_x[enemies];
     float Enemy_y[enemies];
-    float Enemy_speed = 0;
-    int player_health=100;
-
-    int buf = 0;
+    int player_health=1;
 
     bool act_exec;
-    bool enemy_exec;
 
     while (Level_Demo.isOpen()) {
         // check all the window's events that were triggered since the last iteration of the loop
@@ -89,7 +85,7 @@ void open_demo_level(int Weidth,int Height) {
 
 
         bullet.setTexture(&bullet_base_texture);
-        bullet.setSize(Vector2f(16, 32));
+        bullet.setSize(Vector2f(32, 32));
 
         /////////////////////////////Рисуем карту/////////////////////
         for (int i = 0; i < map_height; i++)
@@ -112,8 +108,7 @@ void open_demo_level(int Weidth,int Height) {
                     }
                 }
 
-                s_map.setPosition(j * 32, i *
-                                          32);//по сути раскидывает квадратики, превращая в карту. то есть задает каждому из них позицию. если убрать, то вся карта нарисуется в одном квадрате 32*32 и мы увидим один квадрат
+                s_map.setPosition(j * 32, i * 32);//по сути раскидывает квадратики, превращая в карту. то есть задает каждому из них позицию. если убрать, то вся карта нарисуется в одном квадрате 32*32 и мы увидим один квадрат
 
                 Level_Demo.draw(s_map);//рисуем квадратики на экран
 
@@ -122,10 +117,8 @@ void open_demo_level(int Weidth,int Height) {
 
         //Проверяем положение игрока
 
-        for (int i = Player_y / 32; i < (Player_y + 32) /
-                                        32; i++)//проходимся по тайликам, контактирующим с игроком, то есть по всем квадратикам размера 32*32, которые мы окрашивали в 9 уроке. про условия читайте ниже.
-            for (int j = Player_x / 32; j < (Player_x + 16) /
-                                            32; j++)//икс делим на 32, тем самым получаем левый квадратик, с которым персонаж соприкасается. (он ведь больше размера 32*32, поэтому может одновременно стоять на нескольких квадратах). А j<(x + w) / 32 - условие ограничения координат по иксу. то есть координата самого правого квадрата, который соприкасается с персонажем. таким образом идем в цикле слева направо по иксу, проходя по от левого квадрата (соприкасающегося с героем), до правого квадрата (соприкасающегося с героем)
+        for (int i = Player_y / 32; i < (Player_y + 32) / 32; i++)//проходимся по тайликам, контактирующим с игроком, то есть по всем квадратикам размера 32*32, которые мы окрашивали в 9 уроке. про условия читайте ниже.
+            for (int j = Player_x / 32; j < (Player_x + 16) / 32; j++)//икс делим на 32, тем самым получаем левый квадратик, с которым персонаж соприкасается. (он ведь больше размера 32*32, поэтому может одновременно стоять на нескольких квадратах). А j<(x + w) / 32 - условие ограничения координат по иксу. то есть координата самого правого квадрата, который соприкасается с персонажем. таким образом идем в цикле слева направо по иксу, проходя по от левого квадрата (соприкасающегося с героем), до правого квадрата (соприкасающегося с героем)
             {
                 if (demo_level_map[i][j] ==
                     '0')//если наш квадратик соответствует символу 0 (стена), то проверяем "направление скорости" персонажа:
@@ -154,10 +147,8 @@ void open_demo_level(int Weidth,int Height) {
 
         //BULLET COLLISION with enemy (and enemy ) NOT COMPLETED
 
-        for (int i = Bullet_y / 32; i < (Bullet_y + 16) /
-                                        32; i++)//проходимся по тайликам, контактирующим с игроком, то есть по всем квадратикам размера 32*32, которые мы окрашивали в 9 уроке. про условия читайте ниже.
-            for (int j = Bullet_x / 32; j < (Bullet_x + 16) /
-                                            32; j++)//икс делим на 32, тем самым получаем левый квадратик, с которым персонаж соприкасается. (он ведь больше размера 32*32, поэтому может одновременно стоять на нескольких квадратах). А j<(x + w) / 32 - условие ограничения координат по иксу. то есть координата самого правого квадрата, который соприкасается с персонажем. таким образом идем в цикле слева направо по иксу, проходя по от левого квадрата (соприкасающегося с героем), до правого квадрата (соприкасающегося с героем)
+        for (int i = Bullet_y / 32; i < (Bullet_y + 16) / 32; i++)//проходимся по тайликам, контактирующим с игроком, то есть по всем квадратикам размера 32*32, которые мы окрашивали в 9 уроке. про условия читайте ниже.
+            for (int j = Bullet_x / 32; j < (Bullet_x + 16) / 32; j++)//икс делим на 32, тем самым получаем левый квадратик, с которым персонаж соприкасается. (он ведь больше размера 32*32, поэтому может одновременно стоять на нескольких квадратах). А j<(x + w) / 32 - условие ограничения координат по иксу. то есть координата самого правого квадрата, который соприкасается с персонажем. таким образом идем в цикле слева направо по иксу, проходя по от левого квадрата (соприкасающегося с героем), до правого квадрата (соприкасающегося с героем)
             {
                 if (demo_level_map[i][j] ==
                     '0')//если наш квадратик соответствует символу 0 (стена), то проверяем "направление скорости" персонажа:
@@ -196,7 +187,6 @@ void open_demo_level(int Weidth,int Height) {
             Player_x -= Player_speed;
             dx = -1;
             dy = 0;
-            //enemy_dx=-1;
             act_exec = true;
             raccoon.setTexture(&raccoon_left_texture);
 
@@ -357,7 +347,15 @@ void open_demo_level(int Weidth,int Height) {
 
                 }
 
-                enemy[i].setPosition(Enemy_x[i], Enemy_y[i] += enemy_dy);
+            if(Enemy_y[i]==Bullet_y && Enemy_x[i]==Bullet_x){
+
+                Enemy_y[i]=0;
+                Enemy_x[i]=0;
+                enemy[i].setTexture(&empty_texture);
+
+            }
+
+                enemy[i].setPosition(Enemy_x[i], Enemy_y[i]);
                 Level_Demo.draw(enemy[i]);
             }
 
@@ -366,24 +364,17 @@ void open_demo_level(int Weidth,int Height) {
             Camera_x = Player_x + 32;
             Camera_y = Player_y;
 
-            //if (Player_x < 64) Camera_x = 64;//убираем из вида левую сторону
-            // if (Player_y < 32+120) Camera_y = 64;//верхнюю сторону
-            //if (Player_x > 320) Camera_y = 320;//нижнюю сторону
-
             Camera.setCenter(Camera_x, Camera_y);
             Camera.setSize(Vector2f(200, 200));
             Level_Demo.setView(Camera);
-
 
             raccoon.setSize(Vector2f(16, 32));
             raccoon.setPosition(Player_x, Player_y);
 
             bullet.setPosition(Bullet_x += Bullet_speed_x, Bullet_y += Bullet_speed_y);
 
-
             Level_Demo.draw(raccoon);
             Level_Demo.draw(bullet);
-
 
             Level_Demo.display();
 
